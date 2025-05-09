@@ -1,0 +1,30 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+.admin-header {
+    background-color: #343a40;
+    color: white;
+    padding: 10px 20px;
+}
+.admin-nav {
+    background-color: #e9ecef;
+    padding: 10px 0;
+}
+.admin-nav .nav-link {
+    color: #343a40;
+    font-weight: 500;
+}
+.admin-nav .nav-link.active {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+.admin-content {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}

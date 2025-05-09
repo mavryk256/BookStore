@@ -1,0 +1,63 @@
+.login-container {
+    padding: 20px 50px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.button-login {
+    flex:1;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 8px;
+}
+.button-info > button {
+    background-color: transparent;
+    border: none;
+    padding: 8px 13px;
+}
+.button-info > button:first-child{
+    background-color: #337ab7;
+}
+.button-info > button:first-child:hover{
+    background-color: #226096;
+}
+
+.button-info > button:last-child{
+    padding-left: 4px;
+}
+
+.button-info > button:last-child a:hover{
+    color: red;
+}
+.login-container input[type="text"],
+.login-container input[type="password"], 
+.login-container input[type="email"] {
+    padding: 0 10px;
+    width: 100%;
+    height: 40px;
+    border-radius: 4px;
+    font-weight: 100;
+    padding-left: 15px;
+}
+
+
+.forgot-button {
+    padding: 10px 0;
+    flex: 1;
+}
+.forgot-button button {
+    border: none;
+    padding: 8px 13px;
+    background-color: #337ab7;
+}
+
+.forgot-button button:hover{
+    background-color: #226096;
+}

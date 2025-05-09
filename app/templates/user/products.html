@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Sản Phẩm{% endblock %}
+{% block content %}
+    <div class="products-container">
+        <h2>Danh Sách Sản Phẩm</h2>
+        <a href="{{ url_for('search') }}">Tìm kiếm sản phẩm</a>
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                {% if product.image %}
+                    <img src="{{ url_for('static', filename='uploads/' + product.image) }}" alt="{{ product.name }}" class="product-image">
+                {% endif %}
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <p><strong>Giá:</strong> {{ product.price - (product.price * product.discount / 100) }} (Giảm {{ product.discount }}% từ {{ product.price }})</p>
+                <form method="POST" action="{{ url_for('cart') }}">
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <input type="number" name="quantity" value="1" min="1">
+                    <button type="submit">Thêm vào giỏ</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

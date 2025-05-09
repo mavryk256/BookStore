@@ -1,0 +1,60 @@
+{% extends "admin/admin_base.html" %}
+{% block title %}Quản Lý Người Dùng{% endblock %}
+{% block extra_css %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h3>Quản Lý Người Dùng</h3>
+
+        <!-- Bảng danh sách người dùng -->
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Danh Sách Người Dùng
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Trạng thái</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.lastname }} {{ user.firstname }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phone }}</td>
+                            <td>
+                                <span class="badge {% if user.is_locked %}bg-danger{% else %}bg-success{% endif %}">
+                                    {{ 'Khóa' if user.is_locked else 'Hoạt động' }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a href="{{ url_for('view_user', user_id=user.id) }}" class="btn btn-info btn-sm">Xem chi tiết</a>
+                                    <form method="POST" class="d-inline">
+                                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                                        <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm">Xóa</button>
+                                        <button type="submit" name="action" value="{{ 'unlock' if user.is_locked else 'lock' }}" class="btn btn-warning btn-sm">
+                                            {{ 'Mở khóa' if user.is_locked else 'Khóa' }}
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

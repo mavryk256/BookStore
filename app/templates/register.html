@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Đăng Ký{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="register-container">
+    <form id="registerForm" method="POST" action="{{ url_for('register') }}">
+        <h2>Tạo tài khoản</h2>
+        <p>Nếu chưa có tài khoản, vui lòng đăng ký tại đây.</p>
+
+        <div class="form-group">
+            <label for="firstname">Họ:</label>
+            <input type="text" id="firstname" name="firstname" placeholder="Nhập họ ..." required>
+        </div>
+
+        <div class="form-group">
+            <label for="lastname">Tên:</label>
+            <input type="text" id="lastname" name="lastname" placeholder="Nhập tên ..." required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Nhập email ..." required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Số điện thoại:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại ..." pattern="[0-9]{10}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Tên người dùng:</label>
+            <input type="text" id="username" name="username" placeholder="Nhập tên người dùng (vd: hello123) ..." required>
+        </div>
+
+        <div class="form-group password-group">
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" name="password" placeholder="Nhập mật khẩu (tối thiểu 8 ký tự)" required>
+            <span class="toggle-password" onclick="togglePassword('password')">👁</span>
+        </div>
+
+        <div class="form-group password-group">
+            <label for="confirm-password">Xác nhận mật khẩu:</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Xác nhận mật khẩu ..." required>
+            <span class="toggle-password" onclick="togglePassword('confirm-password')">👁</span>
+        </div>
+
+        <div class="form-group checkbox-group">
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">Tôi đồng ý với <a href="#">điều khoản sử dụng</a></label>
+        </div>
+
+        <div class="button-info">
+            <button type="submit">Đăng ký</button>
+            <button type="button" class="link-button" onclick="window.location.href = '{{ url_for('login') }}'">Đăng nhập</button>
+        </div>
+    </form>
+</div>
+{% if alert_message %}
+    <script>
+        alert("{{ alert_message }}");
+        {% if alert_message == "Đăng ký thành công! Vui lòng đăng nhập." %}
+            window.location.href = "{{ url_for('login') }}";
+        {% endif %}
+    </script>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='javascripts/register.js') }}"></script>
+{% endblock %}

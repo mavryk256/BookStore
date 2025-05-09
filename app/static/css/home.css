@@ -1,0 +1,24 @@
+a{
+    text-decoration: none;
+}
+.product-card {
+    position: relative;
+    transition: transform 0.2s;
+}
+.product-card:hover {
+    transform: scale(1.05);
+}
+.best-seller {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ff6200;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+}
+.category {
+    font-size: 0.9rem;
+    color: #6c757d;
+}

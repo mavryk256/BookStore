@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    {% block extra_css %}
+    {% endblock %}
+
+    <!-- javascript -->
+    <script src="{{ url_for('static', filename='javascripts/base.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <!-- Support Section -->
+        <div class="ho-tro">
+            <div>Bạn cần hỗ trợ: <a href="tel:0981603061" class="support-phone">0981603061</a></div>
+            <div><a href="/pages/lien-he" class="text-muted">Liên hệ hỗ trợ</a></div>
+        </div>
+
+        <!-- Header Content -->
+        <div class="header-content">
+            <div class="logo">
+                <a href="{{ url_for('home') }}">
+                    <img src="/static/image/logo.png" alt="Logo Vựa Sách Cũ">
+                </a>
+            </div>
+            <div class="search-bar">
+                <form action="{{ url_for('search') }}" method="GET" class="d-flex w-100">
+                    <select name="category" class="form-select" aria-label="Chọn danh mục">
+                        <option value="">Chọn danh mục</option>
+                        <option value="sach_19k">Sách đồng giá 19k</option>
+                        <option value="sach_ban_chay">Sách bán chạy</option>
+                        <option value="van_hoc_vn">Văn học Việt Nam</option>
+                        <option value="sach_29k">Sách đồng giá 29k</option>
+                        <option value="sach_9k">Sách đồng giá 9k</option>
+                        <option value="truyen_co_tich">Truyện cổ tích Việt Nam</option>
+                        <option value="truyen_trinh_tham">Truyện trinh thám</option>
+                        <option value="sach_khoa_hoc">Sách khoa học</option>
+                        <option value="sach_ky_nang">Sách kỹ năng sống</option>
+                    </select>
+                    <input type="text" name="q" placeholder="Tìm kiếm..." aria-label="Tìm kiếm" class="form-control" required>
+                    <button type="submit" aria-label="Tìm kiếm"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            <div class="user-actions">
+                <a href="{{ url_for('profile') if 'username' in session else url_for('login') }}" aria-label="Tài khoản" class="account">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a href="{{ url_for('cart') if 'username' in session else url_for('login') }}" aria-label="Giỏ hàng" class="cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Giỏ hàng</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="menu">
+            <ul class="menu-item" id="menu-list">
+                <li class="has-submenu" style="background-color: #fdc71c;">
+                    <a href="#">
+                        <span style="padding-right: 35px;">DANH MỤC SẢN PHẨM</span> <i class="fa-solid fa-bars"></i>
+                    </a>
+                    <ul class="submenu product-submenu" style="width: 100%;">
+                        <li>
+                            <a href="/collections/sach-ban-chay">
+                                <span>Sách bán chạy</span>
+                                <sup><sup><span class="hot-book">HOT</span></sup></sup>
+                            </a>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#">Sách văn học<i class="fas fa-chevron-right"></i></a>
+                            <ul class="submenu">
+                                <li><a href="/collections/sach-tieu-thuyet">Sách tiểu thuyết</a></li>
+                                <li><a href="/collections/sach-truyen-ngan">Sách truyện ngắn</a></li>
+                                <li><a href="/collections/truyen-trinh-tham">Truyện trinh thám</a></li>
+                                <li><a href="/collections/truyen-ngon-tinh">Truyện ngôn tình</a></li>
+                                <li><a href="/collections/van-hoc-viet-nam">Văn học Việt Nam</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#">Sách kinh tế<i class="fas fa-chevron-right"></i></a>
+                            <ul class="submenu">
+                                <li><a href="/collections/sach-marketing">Sách marketing</a></li>
+                                <li><a href="/collections/sach-dau-tu-tai-chinh">Sách đầu tư tài chính</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/collections/sach-ky-nang">Sách kỹ năng</a></li>
+                        <li><a href="/collections/sach-me-va-be">Cẩm nang làm bố mẹ</a></li>
+                        <li><a href="/collections/sach-thieu-nhi">Sách thiếu nhi</a></li>
+                        <li><a href="/collections/sach-khoa-hoc">Sách khoa học</a></li>
+                        <li><a href="/collections/sach-lich-su">Sách lịch sử</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ url_for('home') }}">Trang chủ</a></li>
+                <li><a href="/about">Giới thiệu</a></li>
+
+                <li class="has-submenu">
+                    <a href="#">Thể loại <i class="fas fa-chevron-down" style="padding-left: 10px;"></i></a>
+                    <ul class="submenu list-menu">
+                        <li><a href="/collections/sach-van-hoc">Sách văn học</a></li>
+                        <li class="has-submenu">
+                            <a href="#">Truyện<i class="fas fa-chevron-right"></i></a>
+                            <ul class="submenu">
+                                <li><a href="/collections/truyen-trinh-tham">Truyện trinh thám</a></li>
+                                <li><a href="/collections/truyen-ngon-tinh">Truyện ngôn tình</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#">Sách kinh tế<i class="fas fa-chevron-right"></i></a>
+                            <ul class="submenu">
+                                <li><a href="/collections/sach-dau-tu-tai-chinh">Sách đầu tư tài chính</a></li>
+                                <li><a href="/collections/sach-marketing">Sách marketing</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/collections/sach-ky-nang">Sách kỹ năng</a></li>
+                        <li><a href="/collections/sach-me-va-be">Cẩm nang làm bố mẹ</a></li>
+                        <li><a href="/collections/sach-thieu-nhi">Sách thiếu nhi</a></li>
+                        <li><a href="/collections/sach-lich-su">Sách lịch sử</a></li>
+                        <li><a href="/collections/sach-khoa-hoc">Sách khoa học</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="/blogs/news">Tin tức</a></li>
+                <li><a href="/pages/lien-he">Liên hệ</a></li>
+                <li class="auth">
+                    <i class="fas fa-users"></i>
+                    {% if 'username' in session %}
+                        <a href="{{ url_for('profile') }}" class="text-white">Tài khoản</a> /
+                        <a href="{{ url_for('logout') }}" class="text-white">Đăng xuất</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="text-white">Đăng nhập</a> /
+                        <a href="{{ url_for('register') }}" class="text-white">Đăng ký</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Dynamic Content -->
+    {% block content %} {% endblock %}
+
+    <footer>
+        <div class="support-bar">
+            <span class="icon"><i class="fa-solid fa-question"></i></span>
+            <span>Bạn cần hỗ trợ? Nhấc máy lên và gọi ngay cho chúng tôi:  <a href="tel:0981603061" class="support-phone" style="text-decoration: none; font-weight: bold; color: #fff;">0981603061</a>  hoặc  </span>
+            <button class="support-button" style="background-color: #0088ff;">
+                <a href="/pages/lien-he">
+                    Hỗ trợ trực tuyến
+                </a>
+            </button>
+        </div>
+
+        <div class="footer-info">
+            <div class="info-item">
+                <span class="icon"><i class="fa-solid fa-globe"></i></span>
+                <span>Giao hàng toàn quốc</span>
+            </div>
+            <div class="info-item">
+                <span class="icon"><i class="fa-solid fa-shield"></i></span>
+                <span>Bảo mật thanh toán</span>
+            </div>
+            <div class="info-item">
+                <span class="icon"><i class="fa-solid fa-repeat"></i></span>
+                <span>Đổi trả trong 7 ngày</span>
+            </div>
+            <div class="info-item">
+                <span class="icon"><i class="fa-solid fa-headphones"></i></span>
+                <span>Tư vấn miễn phí</span>
+            </div>
+        </div>
+        <div class="footer-content">
+            <div class="footer-policy">
+                <h5>CHÍNH SÁCH CHUNG</h5>
+                <ul class="footer-policy-items">
+                    <li>
+                        <a href="/pages/chinh-sach-bao-mat">Chính sách bảo mật</a>
+                    </li>
+                    <li>
+                        <a href="/pages/hinh-thuc-thanh-toan">Hình thức thanh toán</a>
+                    </li>
+                    <li>
+                        <a href="/pages/chinh-sach-doi-tra">Chính sách đổi trả</a>
+                    </li>
+                    <li>
+                        <a href="/pages/hinh-thuc-giao-nhan-hang">Hình thức giao & Nhận hàng</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="horizontal-line" style="margin: 25px auto ;"></div>
+
+            <div class="footer-address">
+                <h5>MUA BÁN - TRAO ĐỔI SÁCH GIÁ RẺ</h5>
+                <ul class="footer-address-items">
+                    <li>
+                        Địa chỉ: Số 60 Louis 8, phường Minh Khai, Hai Bà Trưng, Hà Nội, Việt Nam
+                    </li>
+                    <li>
+                        Điện thoại: <a href="tel:0981603061" class="support-phone" style="text-decoration: none; font-weight: bold;">0981603061</a>
+                    </li>
+                    <li>
+                        Email: <a href="/cdn-cgi/l/email-protection#7e161b0019080e1d1f1e121e163e1913105d101c1e" style="font-weight: bold;"><span class="__cf_email__" data-cfemail="7e161b0019080e1d1f1e121e163e1913105d101c1e">[email protected]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Support Buttons (Fixed on Right) -->
+    <div class="support-buttons">
+        <a href="tel:0981603061" class="btn call-btn" title="Gọi ngay">
+            <i class="fas fa-phone"></i>
+        </a>
+        <a href="https://zalo.me/0981603061" target="_blank" class="btn zalo-btn" title="Chat Zalo">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://m.me/your_messenger_id" target="_blank" class="btn messenger-btn" title="Chat Messenger">
+            <i class="fab fa-facebook-messenger"></i>
+        </a>
+        <a href="https://maps.google.com/?q=Số+60+Louis+8,+phường+Minh+Khai,+Hai+Bà+Trưng,+Hà+Nội,+Việt+Nam" target="_blank" class="btn location-btn" title="Xem bản đồ">
+            <i class="fas fa-map-marker-alt"></i>
+        </a>
+        <button class="btn scroll-up-btn" title="Lên đầu trang">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    {% block extra_js %} {% endblock %}
+</body>
+</html>
