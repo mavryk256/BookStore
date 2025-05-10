@@ -42,6 +42,7 @@
             <div class="card shadow-sm border-0 p-4">
                 <h2 class="card-title mb-3">{{ product.name }}</h2>
                 <p class="category mb-2">Danh mục: {{ product.category }}</p>
+                <br><h2>Mô tả sản phẩm</h2>
                 <p class="card-text mb-3">{{ product.description or '' }}</p>
                 <div class="mb-3">
                     {% if product.discount > 0 %}

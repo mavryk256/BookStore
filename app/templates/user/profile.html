@@ -84,6 +84,7 @@
                         <thead>
                             <tr>
                                 <th>ID Đơn Hàng</th>
+                                <th>Hình ảnh</th>
                                 <th>Sản Phẩm</th>
                                 <th>Số Lượng</th>
                                 <th>Tổng Tiền</th>
@@ -94,6 +95,9 @@
                             {% for order in orders %}
                             <tr>
                                 <td>{{ order.id }}</td>
+                                <td>
+                                    <img src="{{ url_for('static', filename='image/' + order.product.image) }}" alt="{{ order.product.name }}" style="width: 100px; height: auto;">
+                                </td>
                                 <td>{{ order.product.name }}</td>
                                 <td>{{ order.quantity }}</td>
                                 <td>{{ '{:,.0f}'.format(order.total_price) }} VNĐ</td>
